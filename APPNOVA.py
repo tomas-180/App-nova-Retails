@@ -243,7 +243,7 @@ def generate_features(df_cache, sku, time_key_str, modelo='A'):
 forecast_requests_count = 0
 actual_requests_count = 0
 
-@app.route('/forecast_prices/', methods=['POST'])
+@app.route('/forecast_prices', methods=['POST'])
 @validate_json_forecast
 def forecast_prices():
 
@@ -306,7 +306,7 @@ def forecast_prices():
 
 # === Actual Prices Endpoint ===
 
-@app.route("/actual_prices/", methods=["POST"])
+@app.route("/actual_prices", methods=["POST"])
 @validate_json_forecast
 def actual_prices():
 
