@@ -78,7 +78,7 @@ with open('model_A_LightGBM.joblib', 'rb') as f:
 with open('model_B_LightGBM.joblib', 'rb') as f:
     pipeline_B = joblib.load(f)
 
-with open("df_historico.pkl", "rb") as f:
+with open("models/df_historico.pkl", "rb") as f:
     df_cache = pickle.load(f)
     df_cache['sku'] = df_cache['sku'].astype(str)
 
