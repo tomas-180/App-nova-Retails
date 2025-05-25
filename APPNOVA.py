@@ -1,4 +1,4 @@
-import json
+vimport json
 import pickle
 import datetime
 import pandas as pd
@@ -153,7 +153,7 @@ def validate_json_forecast(f):
 
 def generate_features(df_cache, sku, time_key_str, modelo='A'):
     if sku not in df_cache['sku'].values:
-        return jsonify({'error': 'SKU {sku} not found in Database.'}), 422
+        raise ValueError(f'SKU {sku} not found in Database.')
     
     # Conversão de data e extração de features temporais
     time_key = pd.to_datetime(str(time_key_str), format="%Y%m%d")
@@ -281,7 +281,7 @@ def forecast_prices():
 
         except Exception as e:
             logger.error(f"Prediction failed: {e}")
-            return jsonify({"error": f"Prediction failed: {str(e)}"}), 500
+            return jsonify({"error": f"Prediction failed: {str(e)}"}), 422
 
         try:
             PricePrediction.create(
