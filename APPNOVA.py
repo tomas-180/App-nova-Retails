@@ -153,7 +153,7 @@ def validate_json_forecast(f):
 
 def generate_features(df_cache, sku, time_key_str, modelo='A'):
     if sku not in df_cache['sku'].values:
-        raise ValueError(f'SKU {sku} not found in Database.')
+        return jsonify({'error': 'SKU {sku} not found in Database.'}), 422
     
     # Conversão de data e extração de features temporais
     time_key = pd.to_datetime(str(time_key_str), format="%Y%m%d")
