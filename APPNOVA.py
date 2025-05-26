@@ -276,9 +276,9 @@ def forecast_prices():
             obs_df_A = generate_features(df_cache, sku, time_key, modelo='A')
             obs_df_B = generate_features(df_cache, sku, time_key, modelo='B')
 
-            price_A = float(pipeline_A.predict(obs_df_A)[0])
-            price_B = float(pipeline_B.predict(obs_df_B)[0])
-
+            price_A = round(float(pipeline_A.predict(obs_df_A)[0]), 2)
+            price_B = round(float(pipeline_B.predict(obs_df_B)[0]), 2)
+            
         except Exception as e:
             logger.error(f"Prediction failed: {e}")
             return jsonify({"error": f"Prediction failed: {str(e)}"}), 422
