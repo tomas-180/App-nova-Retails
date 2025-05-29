@@ -72,10 +72,10 @@ invalid_input_count = 0
 with open('columns_novas.json') as f:
     columns = json.load(f)
 
-with open('Model_A', 'rb') as f:
+with open('models/Model_A', 'rb') as f:
     pipeline_A = joblib.load(f)
 
-with open('Model_B', 'rb') as f:
+with open('models/Model_B', 'rb') as f:
     pipeline_B = joblib.load(f)
 
 with open("models/df_historico_NEW.pkl", "rb") as f:
