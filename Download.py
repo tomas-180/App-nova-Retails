@@ -29,7 +29,7 @@ files = {
 
 for filename, url in files.items():
     try:
-        download_file(url, f"{filename}")
+        download_file(url, f"./models/{filename}")
     except Exception as e:
         print(f"❌ Error downloading {filename}: {e}")
 
