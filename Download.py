@@ -22,7 +22,7 @@ def download_file(url, destination):
     print(f"Downloaded {destination} ({os.path.getsize(destination)} bytes)")
 
 files = {
-    "df_historico.pkl": "https://huggingface.co/datasets/tomas180/df_historico/resolve/main/df_historico.pkl",
+    "df_historico_NEW.pkl": "https://huggingface.co/datasets/tomas180/DF_HIST/resolve/main/df_historico_NEW.pkl?download=true",
     "Model_A": "https://huggingface.co/tomas180/ModelA_RF/resolve/main/Model_A_randomforest_tuned.joblib?download=true",
     "Model_B": "https://huggingface.co/tomas180/ModelA_RF/resolve/main/Model_B_randomforest_tuned.joblib?download=true"
 }
