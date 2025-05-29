@@ -72,13 +72,13 @@ invalid_input_count = 0
 with open('columns_novas.json') as f:
     columns = json.load(f)
 
-with open('model_A_LightGBM.joblib', 'rb') as f:
+with open('Model_A_randomforest_tuned.joblib', 'rb') as f:
     pipeline_A = joblib.load(f)
 
-with open('model_B_LightGBM.joblib', 'rb') as f:
+with open('Model_B_randomforest_tuned.joblib', 'rb') as f:
     pipeline_B = joblib.load(f)
 
-with open("models/df_historico.pkl", "rb") as f:
+with open("models/df_historico_NEW.pkl", "rb") as f:
     df_cache = pickle.load(f)
     df_cache['sku'] = df_cache['sku'].astype(str)
 
@@ -198,19 +198,20 @@ def generate_features(df_cache, sku, time_key_str, modelo='A'):
         return 0.0
     
 
-
-
     final_price_chain = get_mean_value('final_price_chain')
-    discount_chain = get_mean_value('discount_chain')
+    print(final_price_chain)
 
-    # Escolher o desconto consoante o modelo
-    discount_comp = None
+
+    diff_comp = None
     if modelo == 'A':
-        discount_comp = get_mean_value('discount_compA')
+        diff_comp = get_mean_value('diff_compA_hist')
+        print(diff_comp)
     elif modelo == 'B':
-        discount_comp = get_mean_value('discount_compB')
+        diff_comp = get_mean_value('diff_compB_hist')
+        print(diff_comp)
     else:
         raise ValueError("Modelo inválido: deve ser 'A' ou 'B'")
+
 
     row_sample = df_sku.iloc[0]
     structure_level_2 = row_sample['structure_level_2']
@@ -221,7 +222,6 @@ def generate_features(df_cache, sku, time_key_str, modelo='A'):
         'structure_level_2': structure_level_2,
         'structure_level_3': structure_level_3,
         'final_price_chain': final_price_chain,
-        'discount_chain': discount_chain,
         'day_of_week': day_of_week,
         'month': month,
         'is_weekend': is_weekend,
@@ -230,13 +230,16 @@ def generate_features(df_cache, sku, time_key_str, modelo='A'):
     }
 
     if modelo == 'A':
-        features['discount_compA'] = discount_comp
+        features['diff_compA_hist'] = diff_comp
     elif modelo == 'B':
-        features['discount_compB'] = discount_comp
+        features['diff_compB_hist'] = diff_comp
 
+
+
+    print(features)
     return pd.DataFrame([features])
 
-
+    
 
 # === Forecast Endpoint ===
 
